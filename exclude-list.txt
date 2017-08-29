@@ -1,0 +1,9 @@
+scss
+package.json
+.DS_Store
+node_modules
+bower_components
+.idea
+Gruntfile.js
+build-scripts
+.gitignore
