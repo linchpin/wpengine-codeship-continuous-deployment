@@ -45,6 +45,6 @@ The below build script will check out the linchpin build scripts from bitbucket 
 ```
 # load our build script from the linchpin repo
 git clone --branch "master" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
-./build-scripts/wpengine-build
+./wpengine-codeship-continuous-deployment/deploy.sh
 ```
 
