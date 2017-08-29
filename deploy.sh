@@ -21,7 +21,7 @@ fi
 cd ~/clone
 
 # Get official list of files/folders that are not meant to be on production
-wget https://github.com/linchpin/wpengine-codeship-continuous-deployment/items-to-exclude.txt
+wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
 
 # Loop over list of files/folders and remove them from deployment
 ITEMS=`cat items-to-exclude.txt`
@@ -60,7 +60,7 @@ fi
 
 # Move the gitignore file to the deployments folder
 cd ~/deployment
-wget --output-document=.gitignore https://github.com/linchpin/wpengine-codeship-continuous-deployment/gitignore.template.txt
+wget --output-document=.gitignore https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/gitignore-template.txt
 
 # Delete plugin/theme if it exists, and move cleaned version into deployment folder
 rm -rf /wp-content/${PROJECT_TYPE}s/${REPO_NAME}
