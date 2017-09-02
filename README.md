@@ -15,16 +15,10 @@ At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.c
 
 ### How do I get set up? ###
 
-* Configuration
-* Environment Variables
+* [Configuration](https://github.com/linchpin/wpengine-codeship-continuous-deployment#configuration)
+* [Codeship Environment Variables](https://github.com/linchpin/wpengine-codeship-continuous-deployment#codeship-environment-variables)
 * Deployment instructions
 * What this repo needs
-
-### What does this repo need ###
-
-* Writing tests
-* Code review
-* Complete documentation for usage (setup pipelines, testing etc).
 
 ### Configuration ###
 
@@ -34,10 +28,9 @@ At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.c
     Environment variables are a great way to add flexibility to the script with out having variables hard coded within this script.
     You should never have any credentials stored within this or any other repo.
 4. Create deployment pipeline for each branch you going to add automated deployments to **"master"** and **"staging"**. The pipelines you create are going to utilize the **deployment script below**
-5. Do a test push to the repo.
-6. Create deployment pipeline for **"staging"**
+5. Do a test push to the repo. The first time you do this within Codeship it may be beneficial to watch all the steps that are displayed within their helpful console.
 
-### Environment Variables
+### Codeship Environment Variables
 
 All of the environment variables below are required
 
@@ -45,11 +38,11 @@ All of the environment variables below are required
 * **HOST_NAME** : The hostname from WP Engine
 * **PROJECT_TYPE** : (**"theme"** or **"plugin"**)
 
-### Deployment Script
+### Deployment Instructions (The Script)
 
-The below build script will check out the linchpin build scripts from github and then run the shell script accordingly based on the environment variables.
+The below build script(s) will check out the linchpin build scripts from github and then run the shell script accordingly based on the environment variables.
 
-In the example below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically and update the `git clone --branch "master"` line to `git clone --branch "develop"`
+In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically and update the `git clone --branch "master"` line to `git clone --branch "develop"`
 
 ## deploying to master
 ```
@@ -64,3 +57,9 @@ git clone --branch "master" --depth 50 git@github.com:linchpin/wpengine-codeship
 git clone --branch "develop" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
+
+### What does this repo need
+
+* Unit tests
+* Peer review
+* Complete documentation for usage (setup pipelines, testing etc).
