@@ -24,7 +24,9 @@ At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.c
 
 ### Preflight Repo Setup
 
-When creating your repo it's important to name the repo using proper folder structure. We typically replace any spaces " " with dashes "-". Example: If I had a plugin named "My Awesome Plugin" you can name the repo "my-awesome-plugin". When the script runs it will use the repo name as the folder for your plugin or theme. All assets/files within your repo should be within the root folder. **DO NOT** include `wp-content`, `wp-content\plugins` etc. 
+When creating your repo, it's important to name the repo using proper folder structure. We typically replace any spaces " " with dashes "-".**Example:** If your plugin is named "My Awesome Plugin" you can name the repo "my-awesome-plugin". When the script runs it will use the `REPO_NAME` environment variable as the folder for your plugin or theme. So you may find it useful to match.
+
+**Important Note:** All assets/files within your repo should be within the root folder. **DO NOT** include `wp-content`, `wp-content\plugins` etc. The deploy script will create all the appropriate folders as needed.
 
 ### Configuration
 
