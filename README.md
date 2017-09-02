@@ -41,7 +41,7 @@ When creating your repo it's important to name the repo using proper folder stru
 All of the environment variables below are required
 
 * **REPO_NAME** : The repo name should match the theme / plugin folder name
-* **HOST_NAME** : The hostname from WP Engine
+* **WPE_INSTALL** : The subdomain from WP Engine
 * **PROJECT_TYPE** : (**"theme"** or **"plugin"**) This really just determines what folder your repo is in
 
 ### Commit Message Hash Tags
