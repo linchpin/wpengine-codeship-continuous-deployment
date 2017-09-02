@@ -15,11 +15,16 @@ At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.c
 
 ### How do I get set up?
 
+* [Preflight Repo Setup](https://github.com/linchpin/wpengine-codeship-continuous-deployment#preflight-repo-setup)
 * [Configuration](https://github.com/linchpin/wpengine-codeship-continuous-deployment#configuration)
 * [Codeship Environment Variables](https://github.com/linchpin/wpengine-codeship-continuous-deployment#codeship-environment-variables)
 * Deployment instructions
-* What this repo needs
 * [Useful notes](https://github.com/linchpin/wpengine-codeship-continuous-deployment#useful-notes)
+* What this repo needs
+
+### Preflight Repo Setup
+
+When creating your repo it's important to name the repo using proper folder structure. We typically replace any spaces " " with dashes "-". Example: If I had a plugin named "My Awesome Plugin" you can name the repo "my-awesome-plugin". When the script runs it will use the repo name as the folder for your plugin or theme. All assets/files within your repo should be within the root folder. **DO NOT** include `wp-content`, `wp-content\plugins` etc. 
 
 ### Configuration
 
@@ -37,7 +42,7 @@ All of the environment variables below are required
 
 * **REPO_NAME** : The repo name should match the theme / plugin folder name
 * **HOST_NAME** : The hostname from WP Engine
-* **PROJECT_TYPE** : (**"theme"** or **"plugin"**)
+* **PROJECT_TYPE** : (**"theme"** or **"plugin"**) This really just determines what folder your repo is in
 
 ### Commit Message Hash Tags
 
