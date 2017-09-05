@@ -7,3 +7,4 @@ bower_components
 Gruntfile.js
 build-scripts
 .gitignore
+atlassian-ide-plugin.xml
