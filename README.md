@@ -60,20 +60,15 @@ You can customize the actions taken by the deployment script by utilizing the fo
 
 The below build script(s) will check out the linchpin build scripts from github and then run the shell script accordingly based on the environment variables.
 
-In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically and update the `git clone --branch "master"` line to `git clone --branch "develop"`
+In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically.
 
-### deploying to master
+### deploying to your pipeline (master|develop)
+
+In order to deploy to your pipeline you can use the following command regardless of master|develop| or a custom branch. We are doing a git pull using https instead of SSH so we can clone anonymously.
+
 ```
 # load our build script from the linchpin repo
-git clone --branch "master" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
-chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
-./wpengine-codeship-continuous-deployment/deploy.sh
-```
-
-### deploying to staging
-```
-# load our build script from the linchpin repo
-git clone --branch "develop" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
+git clone --branch "master" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
 chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
