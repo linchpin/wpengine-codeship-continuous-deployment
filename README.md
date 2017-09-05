@@ -60,6 +60,7 @@ In the script below you will see this script is specifcally for **master** if yo
 ```
 # load our build script from the linchpin repo
 git clone --branch "master" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
+chmod 555 ./wpengine-codeship-continuous-deployment/wpengine.sh
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
 
@@ -67,6 +68,7 @@ git clone --branch "master" --depth 50 git@github.com:linchpin/wpengine-codeship
 ```
 # load our build script from the linchpin repo
 git clone --branch "develop" --depth 50 git@github.com:linchpin/wpengine-codeship-continuous-deployment.git
+chmod 555 ./wpengine-codeship-continuous-deployment/wpengine.sh
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
 
