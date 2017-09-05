@@ -42,9 +42,12 @@ When creating your repo, it's important to name the repo using proper folder str
 
 All of the environment variables below are required
 
-* **REPO_NAME** : The repo name should match the theme / plugin folder name
-* **WPE_INSTALL** : The subdomain from WP Engine
-* **PROJECT_TYPE** : (**"theme"** or **"plugin"**) This really just determines what folder your repo is in
+|Varible|Description|Required|
+| ------------- | ------------- | ------------- |
+|**REPO_NAME**|The repo name should match the theme / plugin folder name|:heavy_exclamation_mark:|
+|**WPE_INSTALL**|The subdomain from WP Engine|:heavy_exclamation_mark:|
+|**PROJECT_TYPE**|(**"theme"** or **"plugin"**) This really just determines what folder your repo is in|:heavy_exclamation_mark:|
+|**EXCLUDE_LIST**|Custom list of files/directories that will be used to exclude files from deploymnet. This shell script provides a default. This Environment variable is only needed if you are customizing for your own usage. This variable should be a FULL URL to a file. See exclude-list.txt for an example| Optional
 
 ### Commit Message Hash Tags
 
