@@ -6,17 +6,6 @@
 *.swp
 Thumbs.db
 
-# phpstorm
-.idea
-atlassian-ide-plugin.xml
-
-# linchin build scripts
-build-scripts
-package.json
-Gruntfile.js
-node_modules/*
-bower_components/*
-
 # wordpress specific
 wp-config.php
 wp-content/uploads/
