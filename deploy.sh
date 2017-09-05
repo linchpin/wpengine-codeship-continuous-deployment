@@ -24,7 +24,7 @@ cd ~/clone
 wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
 
 # Loop over list of files/folders and remove them from deployment
-ITEMS=`cat items-to-exclude.txt`
+ITEMS=`cat exclude-list.txt`
 for ITEM in $ITEMS; do
     if [[ $ITEM == *.* ]]
     then
@@ -34,8 +34,8 @@ for ITEM in $ITEMS; do
     fi
 done
 
-# Remove items-to-exclude file
-rm items-to-exclude.txt
+# Remove exclude-list file
+rm exclude-list.txt
 
 # Clone the WPEngine files to the deployment directory
 # if we are not force pushing our changes
