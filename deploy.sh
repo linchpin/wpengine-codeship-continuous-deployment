@@ -20,8 +20,14 @@ fi
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
 
-# Get official list of files/folders that are not meant to be on production
-wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
+# Get official list of files/folders that are not meant to be on production if $EXCLUDE_LIST is not set.
+if [[ -z "${EXCLUDE_LIST}" ]];
+then
+    wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
+else
+    # @todo validate proper url?
+    wget ${EXCLUDE_LIST}
+fi
 
 # Loop over list of files/folders and remove them from deployment
 ITEMS=`cat exclude-list.txt`
