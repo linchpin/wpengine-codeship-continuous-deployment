@@ -64,7 +64,7 @@ In the script below you will see this script is specifcally for **master** if yo
 
 ### deploying to your pipeline (master|develop)
 
-In order to deploy to your pipeline you can use the following command regardless of master|develop| or a custom branch. We are doing a git pull using https instead of SSH so we can clone anonymously.
+In order to deploy to your pipeline you can use the following command regardless of master, develop or a custom branch. We are utilizing `https` instead of `SSH` so we can `git clone` the deployment script without requiring authentication.
 
 ```
 # load our build script from the linchpin repo
