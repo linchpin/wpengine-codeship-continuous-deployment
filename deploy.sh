@@ -9,11 +9,20 @@ set -e
 
 # Set repo based on current branch, by default master=production, develop=staging
 # @todo support custom branches
+
+target_wpe_install=${WPE_INSTALL}
+
 if [ "$CI_BRANCH" == "master" ]
 then
     repo=production
 else
     repo=staging
+fi
+
+if [[ "$CI_BRANCH" == "qa" && -n "$WPE_QA_INSTALL" ]]
+then
+    target_wpe_install=${WPE_QA_INSTALL}
+    repo=production
 fi
 
 # Begin from the ~/clone directory
@@ -48,7 +57,7 @@ rm exclude-list.txt
 if [[ $CI_MESSAGE != *#force* ]]
 then
     force=''
-    git clone git@git.wpengine.com:${repo}/${WPE_INSTALL}.git ~/deployment
+    git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ~/deployment
 else
     force='-f'
     if [ ! -d "~/deployment" ]; then
@@ -90,12 +99,12 @@ rsync -a ../clone/* ./wp-content/${PROJECT_TYPE}s/${REPO_NAME}
 
 echo "Add remote"
 
-git remote add ${repo} git@git.wpengine.com:${repo}/${WPE_INSTALL}.git
+git remote add ${repo} git@git.wpengine.com:${repo}/${target_wpe_install}.git
 
 git config --global user.email CI_COMMITTER_EMAIL
 git config --global user.name CI_COMMITTER_NAME
 git config core.ignorecase false
 git add --all
-git commit -am "Deployment to ${WPE_INSTALL} $repo by $CI_COMMITTER_NAME from $CI_NAME"
+git commit -am "Deployment to ${target_wpe_install} $repo by $CI_COMMITTER_NAME from $CI_NAME"
 
 git push ${force} ${repo} master
