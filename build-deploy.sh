@@ -3,7 +3,7 @@
 set -e
 
 # Call our build script
-./build.sh
+sh ./build.sh
 
 # Call our deploy script after the build has been completed without any errors
-./deploy.sh
+sh ./deploy.sh
