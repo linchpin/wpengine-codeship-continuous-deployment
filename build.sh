@@ -14,7 +14,7 @@ build_type=none
 cd ~/clone
 
 # echo the current working directory
-echo pwd
+echo $PWD
 
 if [ -f "$build_file_path" ]
 then
@@ -33,6 +33,8 @@ else
         echo "No Grunt file found. No build needed."
     fi
 fi
+
+echo $build_type
 
 # check to see our build type and if so build using either gulp or grunt
 if [$build_type != "none"]
