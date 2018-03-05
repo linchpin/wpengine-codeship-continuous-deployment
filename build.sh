@@ -13,6 +13,9 @@ build_type=none
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
 
+# echo the current working directory
+echo pwd
+
 if [ -f "$build_file_path" ]
 then
 	echo "Gulpfile found. Starting build process"
@@ -22,7 +25,7 @@ else
 
 	build_file_path="./Gruntfile.js"
 
-    if [ -f "build_file_path" ]
+    if [ -f "$build_file_path" ]
     then
         echo "Gruntfile found."
         build_type=grunt
