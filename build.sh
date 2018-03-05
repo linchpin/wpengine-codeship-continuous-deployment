@@ -36,7 +36,7 @@ if [$build_type != "none"]
 then
     npm install && bower install
 
-    if [ build_type == "gulp" ]
+    if [ $build_type == "gulp" ]
     then
         echo "Building project using gulp"
         gulp build:production
