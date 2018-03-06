@@ -53,7 +53,8 @@ rm exclude-list.txt
 
 # Clone the WPEngine files to the deployment directory
 # if we are not force pushing our changes
-if [[ "$CI_MESSAGE" != *#force* ]] then
+if [[ $CI_MESSAGE != *#force* ]]
+then
     force=''
     git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ~/deployment
 else
