@@ -19,7 +19,7 @@ else
     repo=staging
 fi
 
-if [[ "$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]]
+if [ ""$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]
 then
     target_wpe_install=${WPE_QA_INSTALL}
     repo=production
@@ -30,7 +30,7 @@ fi
 cd ~/clone
 
 # Get official list of files/folders that are not meant to be on production if $EXCLUDE_LIST is not set.
-if [[ -z "${EXCLUDE_LIST}" ]];
+if [ -z "${EXCLUDE_LIST}" ]
 then
     wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
 else
@@ -41,7 +41,7 @@ fi
 # Loop over list of files/folders and remove them from deployment
 ITEMS=`cat exclude-list.txt`
 for ITEM in $ITEMS; do
-    if [[ $ITEM = *.* ]]
+    if [ $ITEM = *.* ]
     then
         find . -depth -name "$ITEM" -type f -exec rm "{}" \;
     else
@@ -54,7 +54,7 @@ rm exclude-list.txt
 
 # Clone the WPEngine files to the deployment directory
 # if we are not force pushing our changes
-if [[ $CI_MESSAGE != *#force* ]]
+if [ $CI_MESSAGE != *#force* ]
 then
     force=''
     git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ~/deployment
