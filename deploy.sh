@@ -19,7 +19,7 @@ else
     repo=staging
 fi
 
-if [[ "$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]];
+if [[ "$CI_BRANCH" == "qa" && -n "$WPE_QA_INSTALL" ]]
 then
     target_wpe_install=${WPE_QA_INSTALL}
     repo=production
@@ -40,7 +40,7 @@ fi
 # Loop over list of files/folders and remove them from deployment
 ITEMS=`cat exclude-list.txt`
 for ITEM in $ITEMS; do
-    if [[ "$ITEM" = *.* ]]
+    if [[ "$ITEM" == *.* ]]
     then
         find . -depth -name "$ITEM" -type f -exec rm "{}" \;
     else
