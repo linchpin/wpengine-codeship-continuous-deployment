@@ -39,8 +39,6 @@ if [ "$build_type" != "none" ]; then
     npm install -g bower
     bower install
 
-    npm rebuild node-sass --force
-
     if [ $build_type = "gulp" ]
     then
         echo "Building project using gulp"
