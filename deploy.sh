@@ -41,7 +41,7 @@ fi
 # Loop over list of files/folders and remove them from deployment
 ITEMS=`cat exclude-list.txt`
 for ITEM in $ITEMS; do
-    if [ "$ITEM" = *.* ]
+    if [ "$ITEM" = "*.*" ]
     then
         find . -depth -name "$ITEM" -type f -exec rm "{}" \;
     else
