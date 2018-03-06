@@ -37,9 +37,11 @@ fi
 echo $build_type
 
 # check to see our build type and if so build using either gulp or grunt
-if [ "$build_type" != "none"]
+if [ "$build_type" != "none" ]
 then
-    npm install && bower install
+    npm install
+    npm install -g bower
+    bower install
 
     if [ "$build_type" == "gulp" ]
     then
