@@ -13,9 +13,6 @@ build_type=none
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
 
-# echo the current working directory
-echo $PWD
-
 if [ -f "$build_file_path" ]
 then
 	echo "Gulpfile found. Starting build process"
@@ -37,13 +34,12 @@ fi
 echo $build_type
 
 # check to see our build type and if so build using either gulp or grunt
-if [ "$build_type" != "none" ]
-then
+if [ "$build_type" != "none" ]; then
     npm install
     npm install -g bower
     bower install
 
-    if [ "$build_type" == "gulp" ]
+    if [ $build_type = "gulp" ]
     then
         echo "Building project using gulp"
         gulp build:production
