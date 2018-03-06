@@ -12,14 +12,15 @@ set -e
 
 target_wpe_install=${WPE_INSTALL}
 
-if [ "$CI_BRANCH" = "master" ]
+if [ "$CI_BRANCH" = "master" ];
 then
     repo=production
 else
     repo=staging
 fi
 
-if [[ "$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]] then
+if [[ "$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]];
+then
     target_wpe_install=${WPE_QA_INSTALL}
     repo=production
 fi
@@ -29,7 +30,7 @@ fi
 cd ~/clone
 
 # Get official list of files/folders that are not meant to be on production if $EXCLUDE_LIST is not set.
-if [[ -z "${EXCLUDE_LIST}" ]] then
+if [[ -z "${EXCLUDE_LIST}" ]]; then
     wget https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/exclude-list.txt
 else
     # @todo validate proper url?
