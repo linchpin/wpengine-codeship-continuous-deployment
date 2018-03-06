@@ -19,7 +19,7 @@ else
     repo=staging
 fi
 
-if [ ""$CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]
+if [ $CI_BRANCH" = "qa" && -n "$WPE_QA_INSTALL" ]
 then
     target_wpe_install=${WPE_QA_INSTALL}
     repo=production
