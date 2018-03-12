@@ -58,6 +58,6 @@ if [ "$build_type" != "none" ]; then
         gulp build:production
     else
         echo "Building project using grunt"
-        grunt build:production
+        grunt
     fi
 fi
