@@ -43,11 +43,16 @@ fi
 
 # check to see our build type and if so build using either gulp or grunt
 if [ "$build_type" != "none" ]; then
+
+    echo "Initiating NPM Install"
+
     npm install
 
     # Only install and fire bower if we have a bower.json
     if [ -f "bower_file_path" ]
     then
+        echo "Initiating Bower Install"
+
         npm install -g bower
         bower install
     fi
