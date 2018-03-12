@@ -49,7 +49,7 @@ if [ "$build_type" != "none" ]; then
     npm install
 
     # Only install and fire bower if we have a bower.json
-    if [ -f "bower_file_path" ]
+    if [ -f "$bower_file_path" ]
     then
         echo "Initiating Bower Install"
 
