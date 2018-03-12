@@ -8,6 +8,7 @@ set -e
 composer_path="./composer.json"
 package_path="./package.json"
 build_file_path="./gulpfile.js"
+bower_file_path="./bower.json"
 build_type=none
 
 # Begin from the ~/clone directory
@@ -17,7 +18,7 @@ cd ~/clone
 # If we have composer dependencies make sure they are installed
 if [ -f "$composer_path" ]
 then
-	echo "Composer File found. Starting Composer Install"
+	echo "Composer File found. Starting composer install."
 
 	composer install
 fi
@@ -40,13 +41,16 @@ else
     fi
 fi
 
-echo $build_type
-
 # check to see our build type and if so build using either gulp or grunt
 if [ "$build_type" != "none" ]; then
     npm install
-    npm install -g bower
-    bower install
+
+    # Only install and fire bower if we have a bower.json
+    if [ -f "bower_file_path" ]
+    then
+        npm install -g bower
+        bower install
+    fi
 
     if [ $build_type = "gulp" ]
     then
