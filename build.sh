@@ -19,7 +19,6 @@ cd ~/clone
 if [ -f "$composer_path" ]
 then
 	echo "Composer File found. Starting composer install."
-
 	composer install
 fi
 
@@ -28,41 +27,57 @@ then
 	echo "Gulpfile found. Starting build process"
 	build_type=gulp
 else
+	build_file_path="./gulpfile.babel.js"
+	if [ -f "$build_file_path" ]
+	then
+		echo "Gulpfile w/ Babel found. Starting build process"
+		build_type=gulp_yarn
+	fi
+fi
+
+if [ "$build_type" == "none" ]
+then
 	echo "Gulpfile not found. Searching for Gruntfile instead."
-
 	build_file_path="./Gruntfile.js"
-
     if [ -f "$build_file_path" ]
     then
         echo "Gruntfile found."
-        build_type=grunt
+        build_type=grunt	
     else
-        echo "No Grunt file found. No build needed."
+        echo "No build file found. No build needed."
     fi
 fi
 
 # check to see our build type and if so build using either gulp or grunt
-if [ "$build_type" != "none" ]; then
+if [ "$build_type" != "none" ]
+then
+	if [ "$build_type" == "gulp_yarn" ]
+	then
+		echo "Yarn Install"
+		yarn install
 
-    echo "Initiating NPM Install"
+		echo "Building project using gulp"
+		gulp build:production
+	else
+	    echo "Initiating NPM Install"
+	    npm install
 
-    npm install
+	    # Only install and fire bower if we have a bower.json
+	    if [ -f "$bower_file_path" ]
+	    then
+		echo "Initiating Bower Install"
 
-    # Only install and fire bower if we have a bower.json
-    if [ -f "$bower_file_path" ]
-    then
-        echo "Initiating Bower Install"
+		npm install -g bower
+		bower install
+	    fi
 
-        npm install -g bower
-        bower install
-    fi
-
-    if [ $build_type = "gulp" ]
-    then
-        echo "Building project using gulp"
-        gulp build:production
-    else
-        echo "Building project using grunt"
-        grunt
-    fi
+	    if [ $build_type = "gulp" ]
+	    then
+		echo "Building project using gulp"
+		gulp build:production
+	    else
+		 echo "Building project using grunt"
+		grunt
+	    fi
+	fi
 fi
