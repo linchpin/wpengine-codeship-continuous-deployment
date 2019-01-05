@@ -77,7 +77,7 @@ then
 		gulp build:production
 	    else
 		 echo "Building project using grunt"
-		grunt
+		grunt build
 	    fi
 	fi
 fi
