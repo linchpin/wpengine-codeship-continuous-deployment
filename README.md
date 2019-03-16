@@ -12,8 +12,9 @@ For a more indepth walk through please visit [this article](https://linchpin.age
 
 * You are using Codeship as your CI/CD solution so you _may_ need to make adjustments based on deploybot or another service.
 * You understand how to setup [.git deployments on WP Engine](https://wpengine.com/git/) already.
-* You are using the **master** branch of your repo for **production**
-* You are using the **develop** branch of your repo for **staging**
+* You are using the **master** branch of your repo for your **Production** instance
+* You are using the **staging** branch of your repo for your **Staging** instance
+* You are using the **develop** branch of your repo for your **Development** instance
 
 ### How do I get set up?
 
@@ -37,7 +38,7 @@ When creating your repo, it's important to name the repo using proper folder str
 3. Setup [Environment Variables](https://github.com/linchpin/wpengine-codeship-continuous-deployment#codeship-environment-variables)
     * Environment variables are a great way to add flexibility to the script with out having variables hard coded within this script.
     * You should never have any credentials stored within this or any other repo.
-4. Create deployment pipeline for each branch you are going to add automated deployments to **"master"** and **"staging"**. The pipelines you create are going to utilize the **deployment script below**
+4. Create deployment pipeline for each branch you are going to add automated deployments to (For single install setups use **"master"** and **"develop"**. For multi-environment setups use **master**, **staging**, and **"develop"**). The pipelines you create are going to utilize the **deployment script below**
 5. Do a test push to the repo. The first time you do this within Codeship it may be beneficial to watch all the steps that are displayed within their helpful console.
 
 ### Codeship Environment Variables
@@ -47,8 +48,23 @@ All of the environment variables below are required
 |Variable|Description|Required|
 | ------------- | ------------- | ------------- |
 |**REPO_NAME**|The repo name should match the theme / plugin folder name|:heavy_exclamation_mark:|
-|**WPE_INSTALL**|The subdomain from WP Engine|:heavy_exclamation_mark:|
+|**WPE_INSTALL**|The subdomain from WP Engine **(This is for single installs only and is considered legacy)**|:heavy_exclamation_mark:|
 |**PROJECT_TYPE**|(**"theme"** or **"plugin"**) This really just determines what folder your repo is in|:heavy_exclamation_mark:|
+
+
+These variables below are not required, but are used for WP Engines current multi-environment setup. Moving away from legacy staging, WPe is allowing 3 independant installs under one site. The are all essentially production environments, but are treated as Production, Staging, and Development environments when it comes to your workflow.
+
+|Variable|Description|Required|
+| ------------- | ------------- | ------------- |
+|**WPE_INSTALL_PROD**|The subdomain from WP Engine install "Production"||
+|**WPE_INSTALL_STAGE**|The subdomain from WP Engine install "Staging"||
+|**WPE_INSTALL_DEV**|The subdomain from WP Engine install "Development"||
+
+
+This variable is optional to source a custom excludes list file.
+
+|Variable|Description|Required|
+| ------------- | ------------- | ------------- |
 |**EXCLUDE_LIST**|Custom list of files/directories that will be used to exclude files from deploymnet. This shell script provides a default. This Environment variable is only needed if you are customizing for your own usage. This variable should be a FULL URL to a file. See exclude-list.txt for an example| Optional
 
 ### Commit Message Hash Tags
@@ -64,7 +80,7 @@ The below build script(s) will check out the linchpin build scripts from github 
 
 In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically.
 
-### deploying to your pipeline (master|develop)
+### deploying to your pipeline (master|develop - legacy | or master|staging|develop)
 
 In order to deploy to your pipeline you can use the following command regardless of master, develop or a custom branch. We are utilizing `https` instead of `SSH` so we can `git clone` the deployment script without requiring authentication.
 
@@ -76,7 +92,7 @@ chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
 
 ## Useful Notes
-* WP Engine's .git push can almost be considered a "middle man" between your repo and what is actually displayed to your visitors within the root web directory of your website. After the files are .git pushed to your production or staging remote branches they are then synced to the appropriate environment's webroot. It's important to know this because there are scenarios where you may need to use the **#force** hashtag within your commit message in order to override what WP Engine is storing within it's repo and what is shown when logged into SFTP. You can read more about it on [WP Engine](https://wpengine.com/support/resetting-your-git-push-to-deploy-repository/)
+* WP Engine's .git push can almost be considered a "middle man" between your repo and what is actually displayed to your visitors within the root web directory of your website. After the files are .git pushed to your production, staging, or develop remote branches they are then synced to the appropriate environment's webroot. It's important to know this because there are scenarios where you may need to use the **#force** hashtag within your commit message in order to override what WP Engine is storing within it's repo and what is shown when logged into SFTP. You can read more about it on [WP Engine](https://wpengine.com/support/resetting-your-git-push-to-deploy-repository/)
 
 * If an SFTP user in WP Engine has uploaded any files to staging or production those assets **WILL NOT** be added to the repo.
 * Additionally there are times where files need to deleted that are not associated with the repo. In these scenarios we suggest deleting the files using SFTP and then utilizing the **#force** hash tag within the next deployment you make.
