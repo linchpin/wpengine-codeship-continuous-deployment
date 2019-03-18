@@ -4,24 +4,47 @@ set -e
 
 # Check for required environment variables and make sure they are setup
 : ${PROJECT_TYPE?"PROJECT_TYPE Missing"} # theme|plugin
-: ${WPE_INSTALL?"WPE_INSTALL Missing"}   # subdomain for wpengine install 
+: ${WPE_INSTALL?"WPE_INSTALL Missing"}   # subdomain for wpengine install (Legacy single environment setup)
 : ${REPO_NAME?"REPO_NAME Missing"}       # repo name (Typically the folder name of the project)
 
 # Set repo based on current branch, by default master=production, develop=staging
 # @todo support custom branches
 
+
+# This is considered legacy wpengine setup and should be deprecated. We'll keep this workflow in place for backwards compatibility.
 target_wpe_install=${WPE_INSTALL}
 
-if [ "$CI_BRANCH" = "master" ];
+if [ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" && -z "$WPE_INSTALL_PROD" ]
 then
     repo=production
 else
     repo=staging
 fi
 
+# This is a client specific deloyment
 if [[ "$CI_BRANCH" == "qa" && -n "$WPE_QA_INSTALL" ]]
 then
     target_wpe_install=${WPE_QA_INSTALL}
+    repo=production
+fi
+
+
+# In WP Engine's multi-environment setup, we'll target each instance based on branch with variables to designate them individually.
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -n "$WPE_INSTALL" ]]
+then
+    target_wpe_install=${WPE_INSTALL_PROD}
+    repo=production
+fi
+
+if [[ "$CI_BRANCH" == "staging" && -n "$WPE_INSTALL_STAGE" && -n "$WPE_INSTALL" ]]
+then
+    target_wpe_install=${WPE_INSTALL_STAGE}
+    repo=production
+fi
+
+if [[ "$CI_BRANCH" == "develop" && -n "$WPE_INSTALL_DEV" && -n "$WPE_INSTALL" ]]
+then
+    target_wpe_install=${WPE_INSTALL_DEV}
     repo=production
 fi
 
