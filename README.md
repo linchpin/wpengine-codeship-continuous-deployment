@@ -48,11 +48,11 @@ All of the environment variables below are required
 |Variable|Description|Required|
 | ------------- | ------------- | ------------- |
 |**REPO_NAME**|The repo name should match the theme / plugin folder name|:heavy_exclamation_mark:|
-|**WPE_INSTALL**|The subdomain from WP Engine **(This is for single installs only and is considered legacy)**|:heavy_exclamation_mark:|
-|**PROJECT_TYPE**|(**"theme"** or **"plugin"**) This really just determines what folder your repo is in|:heavy_exclamation_mark:|
+|**WPE_INSTALL**|The subdomain of your WP Engine install **(This is for single installs only and is considered deprecated)**|:heavy_exclamation_mark:|
+|**PROJECT_TYPE**|(**"theme"** or **"plugin"**) This really just determines what base folder your repo should be deployed to|:heavy_exclamation_mark:|
 
 
-These variables below are not required, but are used for WP Engines current multi-environment setup. Moving away from legacy staging, WPe is allowing 3 independant installs under one site. The are all essentially production environments, but are treated as Production, Staging, and Development environments when it comes to your workflow.
+The variables below are not required, but are utilized to work with WP Engine's current multi-environment setup. Moving away from legacy staging, WP Engine now utilizes 3 individual installs under one "site". The are all essentially part of your same hosting environment, but are treated as Production, Staging, and Development environments when it comes to your workflow.
 
 |Variable|Description|Required|
 | ------------- | ------------- | ------------- |
@@ -80,7 +80,7 @@ The below build script(s) will check out the linchpin build scripts from github 
 
 In the script below you will see this script is specifcally for **master** if you wanted to use this for staging you would setup a deployment that targets **develop** specifically.
 
-### deploying to your pipeline (master|develop - legacy | or master|staging|develop)
+### deploying to your pipeline (master|develop - deprecated | or master|staging|develop)
 
 In order to deploy to your pipeline you can use the following command regardless of master, develop or a custom branch. We are utilizing `https` instead of `SSH` so we can `git clone` the deployment script without requiring authentication.
 
