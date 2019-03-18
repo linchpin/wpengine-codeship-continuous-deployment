@@ -6,7 +6,7 @@ At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.c
 
 For a more indepth walk through please visit [this article](https://linchpin.agency/blog/continuous-deployment-wp-engine-codeship/?utm_source=github&utm_medium=deployments&utm_campaign=wpengine) on the Linchpin site.
 
-# Beta Public Release Version 1.0
+# Public Release Version 2.0
 
 ### The instructions and the deployment script assumes the following
 
