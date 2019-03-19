@@ -8,6 +8,10 @@ For a more indepth walk through please visit [this article](https://linchpin.age
 
 # Public Release Version 2.0
 
+### Important Changes Regarding the build process compared to v1
+
+The latest version of this script will not only deploy your code, the latest version will also *build* your code as long as the script finds a `gulpfile`, `gruntfile`, `yarn` etc. In order to bild your project simply create a task in your task runner named `build:production`.
+
 ### The instructions and the deployment script assumes the following
 
 * You are using Codeship as your CI/CD solution so you _may_ need to make adjustments based on deploybot or another service.
@@ -86,7 +90,7 @@ In order to deploy to your pipeline you can use the following command regardless
 
 ```
 # load our build script from the linchpin repo
-git clone --branch "improvement/build-process" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
+git clone --branch "master" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
 chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
 ./wpengine-codeship-continuous-deployment/deploy.sh
 ```
