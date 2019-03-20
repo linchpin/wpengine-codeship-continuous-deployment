@@ -53,11 +53,15 @@ if [ "$build_type" != "none" ]
 then
 	if [ "$build_type" == "gulp_yarn" ]
 	then
-		echo "Yarn Install"
-		yarn install
+		# Only build if the build:production task exists in the build path
+		if [ grep -Fxq "build:production" "$build_file_path" ]
+		then
+			echo "Yarn Install"
+			yarn install
 
-		echo "Building project using gulp"
-		gulp build:production
+			echo "Building project using gulp"
+			gulp build:production
+		fi
 	else
 	    echo "Initiating NPM Install"
 	    npm install
@@ -65,19 +69,29 @@ then
 	    # Only install and fire bower if we have a bower.json
 	    if [ -f "$bower_file_path" ]
 	    then
-		echo "Initiating Bower Install"
+		    if [ grep -Fxq "build:production" "$bower_file_path" ]
+			then
+			echo "Initiating Bower Install"
 
-		npm install -g bower
-		bower install
+			npm install -g bower
+			bower install
+		    fi
 	    fi
 
 	    if [ $build_type = "gulp" ]
 	    then
-		echo "Building project using gulp"
-		gulp build:production
+		    if [ grep -Fxq "build:production" "$build_file_path" ]
+			then
+			echo "Building project using gulp"
+			gulp build:production
+		    fi
 	    else
-		 echo "Building project using grunt"
-		grunt build
+	    	    # Make sure we have a build command within our grunt file
+		    if [ grep -Fxq "build" "$build_file_path" ]
+			then
+			echo "Building project using grunt"
+			grunt build
+		    fi
 	    fi
 	fi
 fi
