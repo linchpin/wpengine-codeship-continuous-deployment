@@ -42,13 +42,6 @@ then
     repo=production
 fi
 
-echo "###################"
-echo "$CI_BRANCH"
-echo "$repo"
-echo "$PROJECT_TYPE"
-echo "$target_wpe_install"
-echo "###################"
-
 # Begin from the ~/clone directory
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
@@ -75,12 +68,15 @@ done
 # Remove exclude-list file
 rm exclude-list.txt
 
+# go back home
+cd ~
+
 # Clone the WPEngine files to the deployment directory
 # if we are not force pushing our changes
 if [[ "$CI_MESSAGE" != *#force* ]]
 then
     force=''
-    git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ~/deployment
+    git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ./deployment
 else
     force='-f'
 fi
@@ -93,7 +89,8 @@ fi
 
 cd ~ # go back home
 
-if [ ! -d "./deployment" ]; then
+# check to see if we have a deployment folder, if so change directory to it. If not make the directory an initialize a git repo
+if [ ! -d ./deployment ]; then
     mkdir ./deployment
     cd ./deployment
     git init
@@ -102,22 +99,26 @@ else
 fi
 
 # Move the gitignore file to the deployments folder
-
 wget --output-document=.gitignore https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/gitignore-template.txt
 
 # Delete plugin/theme if it exists, and move cleaned version into deployment folder
 rm -rf ./wp-content/${PROJECT_TYPE}s/${REPO_NAME}
 
 # Check to see if the wp-content directory exists, if not create it
-if [ ! -d "./wp-content" ]; then
+if [ ! -d ./wp-content ];
+then
     mkdir ./wp-content
 fi
+
 # Check to see if the plugins directory exists, if not create it
-if [ ! -d "./wp-content/plugins" ]; then
+if [ ! -d ./wp-content/plugins ];
+then
     mkdir ./wp-content/plugins
 fi
+
 # Check to see if the themes directory exists, if not create it
-if [ ! -d "./wp-content/themes" ]; then
+if [ ! -d ./wp-content/themes ];
+then
     mkdir ./wp-content/themes
 fi
 
