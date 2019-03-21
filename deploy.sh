@@ -45,6 +45,7 @@ fi
 echo "###################"
 echo "$CI_BRANCH"
 echo "$repo"
+echo "$PROJECT_TYPE"
 echo "$target_wpe_install"
 echo "###################"
 
