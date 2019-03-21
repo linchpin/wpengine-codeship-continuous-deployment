@@ -10,11 +10,10 @@ set -e
 # Set repo based on current branch, by default master=production, develop=staging
 # @todo support custom branches
 
-
 # This is considered legacy wpengine setup and should be deprecated. We'll keep this workflow in place for backwards compatibility.
 target_wpe_install=${WPE_INSTALL}
 
-if [ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" && -z "$WPE_INSTALL_PROD" ]
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" && -z "$WPE_INSTALL_PROD" ]]
 then
     repo=production
 else
