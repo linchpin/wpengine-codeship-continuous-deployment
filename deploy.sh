@@ -42,6 +42,12 @@ then
     repo=production
 fi
 
+echo "###################"
+echo "$CI_BRANCH"
+echo "$repo"
+echo "$target_wpe_install"
+echo "###################"
+
 # Begin from the ~/clone directory
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
