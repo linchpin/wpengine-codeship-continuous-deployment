@@ -18,6 +18,7 @@ then
     repo=production
 else
     if [[ "$CI_BRANCH" == "develop" && -n "$WPE_INSTALL" ]]
+    then
         repo=staging
     fi
 fi
