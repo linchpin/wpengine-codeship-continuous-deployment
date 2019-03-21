@@ -90,12 +90,15 @@ In order to deploy to your pipeline you can use the following command regardless
 
 ```
 # load our build script from the linchpin repo
-git clone --branch "master" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
+git clone --branch "improvement/build-process" --depth 50 https://github.com/linchpin/wpengine-codeship-continuous-deployment.git
+chmod 555 ./wpengine-codeship-continuous-deployment/build.sh
 chmod 555 ./wpengine-codeship-continuous-deployment/deploy.sh
-./wpengine-codeship-continuous-deployment/deploy.sh
+chmod 555 ./wpengine-codeship-continuous-deployment/build-deploy.sh
+./wpengine-codeship-continuous-deployment/build-deploy.sh
 ```
 
 ## Useful Notes
+
 * WP Engine's .git push can almost be considered a "middle man" between your repo and what is actually displayed to your visitors within the root web directory of your website. After the files are .git pushed to your production, staging, or develop remote branches they are then synced to the appropriate environment's webroot. It's important to know this because there are scenarios where you may need to use the **#force** hashtag within your commit message in order to override what WP Engine is storing within it's repo and what is shown when logged into SFTP. You can read more about it on [WP Engine](https://wpengine.com/support/resetting-your-git-push-to-deploy-repository/)
 
 * If an SFTP user in WP Engine has uploaded any files to staging or production those assets **WILL NOT** be added to the repo.
