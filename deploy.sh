@@ -91,18 +91,22 @@ if [ "$?" != "0" ] ; then
     kill -SIGINT $$
 fi
 
-if [ ! -d "~/deployment" ]; then
-    mkdir ~/deployment
-    cd ~/deployment
+cd ~ # go back home
+
+if [ ! -d "./deployment" ]; then
+    mkdir ./deployment
+    cd ./deployment
     git init
+else
+    cd ./deployment
 fi
 
 # Move the gitignore file to the deployments folder
-cd ~/deployment
+
 wget --output-document=.gitignore https://raw.githubusercontent.com/linchpin/wpengine-codeship-continuous-deployment/master/gitignore-template.txt
 
 # Delete plugin/theme if it exists, and move cleaned version into deployment folder
-rm -rf /wp-content/${PROJECT_TYPE}s/${REPO_NAME}
+rm -rf ./wp-content/${PROJECT_TYPE}s/${REPO_NAME}
 
 # Check to see if the wp-content directory exists, if not create it
 if [ ! -d "./wp-content" ]; then
