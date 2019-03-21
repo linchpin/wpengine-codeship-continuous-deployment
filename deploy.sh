@@ -17,31 +17,25 @@ if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" && -z "$WPE_INSTALL_PROD" ]]
 then
     repo=production
 else
-    repo=staging
+    if [[ "$CI_BRANCH" == "develop" && -n "$WPE_INSTALL" ]]
+        repo=staging
+    fi
 fi
-
-# This is a client specific deloyment
-if [[ "$CI_BRANCH" == "qa" && -n "$WPE_QA_INSTALL" ]]
-then
-    target_wpe_install=${WPE_QA_INSTALL}
-    repo=production
-fi
-
 
 # In WP Engine's multi-environment setup, we'll target each instance based on branch with variables to designate them individually.
-if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -n "$WPE_INSTALL" ]]
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -z "$WPE_INSTALL" ]]
 then
     target_wpe_install=${WPE_INSTALL_PROD}
     repo=production
 fi
 
-if [[ "$CI_BRANCH" == "staging" && -n "$WPE_INSTALL_STAGE" && -n "$WPE_INSTALL" ]]
+if [[ "$CI_BRANCH" == "staging" && -n "$WPE_INSTALL_STAGE" ]]
 then
     target_wpe_install=${WPE_INSTALL_STAGE}
     repo=production
 fi
 
-if [[ "$CI_BRANCH" == "develop" && -n "$WPE_INSTALL_DEV" && -n "$WPE_INSTALL" ]]
+if [[ "$CI_BRANCH" == "develop" && -n "$WPE_INSTALL_DEV" ]]
 then
     target_wpe_install=${WPE_INSTALL_DEV}
     repo=production
