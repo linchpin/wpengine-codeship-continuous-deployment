@@ -77,23 +77,24 @@ rm exclude-list.txt
 
 # Clone the WPEngine files to the deployment directory
 # if we are not force pushing our changes
-if [[ $CI_MESSAGE != *#force* ]]
+if [[ "$CI_MESSAGE" != *#force* ]]
 then
     force=''
     git clone git@git.wpengine.com:${repo}/${target_wpe_install}.git ~/deployment
 else
     force='-f'
-    if [ ! -d "~/deployment" ]; then
-        mkdir ~/deployment
-        cd ~/deployment
-        git init
-    fi
 fi
 
 # If there was a problem cloning, exit
 if [ "$?" != "0" ] ; then
     echo "Unable to clone ${repo}"
     kill -SIGINT $$
+fi
+
+if [ ! -d "~/deployment" ]; then
+    mkdir ~/deployment
+    cd ~/deployment
+    git init
 fi
 
 # Move the gitignore file to the deployments folder
