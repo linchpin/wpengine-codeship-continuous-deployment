@@ -53,12 +53,12 @@ if [ "$build_type" != "none" ]
 then
 	if [ "$build_type" == "gulp_yarn" ]
 	then
+		echo "Yarn Install"
+		yarn install
+	
 		# Only build if the build:production task exists in the build path
 		if grep -q build:production "$build_file_path";
 		then
-			echo "Yarn Install"
-			yarn install
-
 			echo "Building project using gulp"
 			gulp build:production
 		fi
@@ -69,13 +69,10 @@ then
 	    # Only install and fire bower if we have a bower.json
 	    if [ -f "$bower_file_path" ]
 	    then
-		    if grep -q build:production "$bower_file_path";
-			then
-			echo "Initiating Bower Install"
+		echo "Initiating Bower Install"
 
-			npm install -g bower
-			bower install
-		    fi
+		npm install -g bower
+		bower install
 	    fi
 
 	    if [ $build_type = "gulp" ]
