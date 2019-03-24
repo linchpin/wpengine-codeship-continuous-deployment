@@ -2,7 +2,7 @@
 
 Love WordPress? Love WP Engine and want to take advantage of their git deployment but need to have more flexiblity to deploy multiple repos? This script will assist you in automatically deploying WordPress plugins and themes to [WP Engine .git deployment](https://wpengine.com/git/) using [Codeship](https://codeship.com) or other deployment services.
 
-At [Linchpin](https://linchpin.agency) we use [WP Engine](https://www.wpengine.com) and [Codeship](https://www.codeship.com) and love both. Hopefully you find this shell script useful.
+At [Linchpin](https://linchpin.com) we use [WP Engine](https://www.wpengine.com) and [Codeship](https://www.codeship.com) and love both. Hopefully you find this shell script useful.
 
 For a more indepth walk through please visit [this article](https://linchpin.agency/blog/continuous-deployment-wp-engine-codeship/?utm_source=github&utm_medium=deployments&utm_campaign=wpengine) on the Linchpin site.
 
@@ -11,6 +11,8 @@ For a more indepth walk through please visit [this article](https://linchpin.age
 ### Important Changes Regarding the build process compared to v1
 
 The latest version of this script will not only deploy your code, the latest version will also *build* your code as long as the script finds a `gulpfile`, `gruntfile`, `yarn` etc. In order to bild your project simply create a task in your task runner named `build:production`.
+
+*Supports both WP Engine legacy and Multi environment sites (Legacy Staging or Dev, Staging, Production)*
 
 ### The instructions and the deployment script assumes the following
 
@@ -107,5 +109,4 @@ chmod 555 ./wpengine-codeship-continuous-deployment/build-deploy.sh
 ### What does this repo need
 
 * Tests and Validation
-* Peer review
 * Complete documentation for usage (setup pipelines, testing etc).
