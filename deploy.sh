@@ -13,7 +13,7 @@ set -e
 # This is considered legacy wpengine setup and should be deprecated. We'll keep this workflow in place for backwards compatibility.
 target_wpe_install=${WPE_INSTALL}
 
-if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" && -z "$WPE_INSTALL_PROD" ]]
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL" ]]
 then
     repo=production
 else
@@ -24,14 +24,7 @@ else
 fi
 
 # In WP Engine's multi-environment setup, we'll target each instance based on branch with variables to designate them individually.
-if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -z "$WPE_INSTALL" ]]
-then
-    target_wpe_install=${WPE_INSTALL_PROD}
-    repo=production
-fi
-
-#  If the environment variables are set for both legacy and the new way. Use the new way.
-if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -n "$WPE_INSTALL" ]]
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" ]]
 then
     target_wpe_install=${WPE_INSTALL_PROD}
     repo=production
