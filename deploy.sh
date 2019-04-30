@@ -30,6 +30,13 @@ then
     repo=production
 fi
 
+#  If the environment variables are set for both legacy and the new way. Use the new way.
+if [[ "$CI_BRANCH" == "master" && -n "$WPE_INSTALL_PROD" && -n "$WPE_INSTALL" ]]
+then
+    target_wpe_install=${WPE_INSTALL_PROD}
+    repo=production
+fi
+
 if [[ "$CI_BRANCH" == "staging" && -n "$WPE_INSTALL_STAGE" ]]
 then
     target_wpe_install=${WPE_INSTALL_STAGE}
