@@ -42,6 +42,9 @@ then
     repo=production
 fi
 
+echo "Install: ${WPE_INSTALL_PROD} or ${WPE_INSTALL}"
+echo "Repo: ${repo}"
+
 # Begin from the ~/clone directory
 # this directory is the default your git project is checked out into by Codeship.
 cd ~/clone
